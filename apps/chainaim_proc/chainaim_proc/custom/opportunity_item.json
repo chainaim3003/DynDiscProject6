@@ -1,0 +1,57 @@
+{
+  "doctype": "Opportunity Item",
+  "custom_perms": [],
+  "property_setters": [],
+  "sync_on_migrate": 1,
+  "custom_fields": [
+    {
+      "dt": "Opportunity Item",
+      "fieldname": "custom_size",
+      "label": "Size",
+      "fieldtype": "Data",
+      "insert_after": "amount",
+      "description": "Size label (S/M/L/XL) - convenience copy when needed."
+    },
+    {
+      "dt": "Opportunity Item",
+      "fieldname": "custom_required_delivery_date",
+      "label": "Required Delivery Date (line)",
+      "fieldtype": "Date",
+      "insert_after": "custom_size",
+      "description": "Per-line date when basket lines have different dates."
+    },
+    {
+      "dt": "Opportunity Item",
+      "fieldname": "custom_destination",
+      "label": "Destination (line)",
+      "fieldtype": "Data",
+      "insert_after": "custom_required_delivery_date",
+      "description": "Per-line destination (e.g. P04: tees->Rotterdam, polos->Hamburg)."
+    },
+    {
+      "dt": "Opportunity Item",
+      "fieldname": "custom_target_rate",
+      "label": "Target Rate (line)",
+      "fieldtype": "Currency",
+      "insert_after": "custom_destination",
+      "description": "Per-line target if buyer stated one."
+    },
+    {
+      "dt": "Opportunity Item",
+      "fieldname": "custom_canFulfill",
+      "label": "Can Fulfill",
+      "fieldtype": "Check",
+      "insert_after": "custom_target_rate",
+      "default": "0",
+      "description": "Feasibility result from Inventory consult (written by agent). NOTE: camelCase fieldname per DESIGN_6/03; verify it persists on this DB."
+    },
+    {
+      "dt": "Opportunity Item",
+      "fieldname": "custom_earliest_ship_date",
+      "label": "Earliest Ship Date",
+      "fieldtype": "Date",
+      "insert_after": "custom_canFulfill",
+      "description": "Per-line earliest credible ship date (written by agent)."
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "doctype": "Quotation",
+  "custom_perms": [],
+  "property_setters": [],
+  "sync_on_migrate": 1,
+  "custom_fields": [
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_quoted_by_agent",
+      "label": "Quoted By Agent",
+      "fieldtype": "Data",
+      "insert_after": "opportunity",
+      "description": "Seller agent handle (e.g. jupiterSellerAgent). Source: agent card."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_quoted_by_oor",
+      "label": "Quoted By OOR",
+      "fieldtype": "Data",
+      "insert_after": "custom_quoted_by_agent",
+      "description": "Seller OOR holder (e.g. Jupiter_Chief_Sales_Officer). Source: agent card vLEImetadata.oorHolderName."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_seller_lei",
+      "label": "Seller LEI",
+      "fieldtype": "Data",
+      "insert_after": "custom_quoted_by_oor",
+      "description": "GLEIF LEI of the selling entity. Source: agent card."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_seller_agent_aid",
+      "label": "Seller Agent AID",
+      "fieldtype": "Data",
+      "insert_after": "custom_seller_lei",
+      "description": "KERI agent AID. Source: agent card keriIdentifiers.agentAID."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_seller_oor_aid",
+      "label": "Seller OOR AID",
+      "fieldtype": "Data",
+      "insert_after": "custom_seller_agent_aid",
+      "description": "KERI OOR holder AID. Source: agent card keriIdentifiers.oorHolderAID."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_quote_revision",
+      "label": "Quote Revision",
+      "fieldtype": "Int",
+      "insert_after": "custom_seller_oor_aid",
+      "default": "1",
+      "non_negative": 1,
+      "description": "Friendly counter R1/R2/R3 parallel to native amended_from chain. Source: saga round."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_quoted_at",
+      "label": "Quoted At",
+      "fieldtype": "Datetime",
+      "insert_after": "custom_quote_revision",
+      "description": "Agent-stamped ISO issue time. Source: orchestrator."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_credential_mode",
+      "label": "Credential Mode",
+      "fieldtype": "Select",
+      "options": "plain\nvlei",
+      "insert_after": "custom_quoted_at",
+      "default": "plain",
+      "description": "plain for P01-P10; vlei from ITER7. Source: flag CREDENTIAL_MODE."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_signed_envelope_hash",
+      "label": "Signed Envelope Hash",
+      "fieldtype": "Data",
+      "insert_after": "custom_credential_mode",
+      "description": "sha256 envelope hash of the issued quote (joins T5 audit). Source: PlainHashSigner."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_negotiation_id",
+      "label": "Negotiation ID",
+      "fieldtype": "Data",
+      "insert_after": "custom_signed_envelope_hash",
+      "in_standard_filter": 1,
+      "description": "Saga negotiationId (joins T2/T5/Opportunity). Source: orchestrator."
+    },
+    {
+      "dt": "Quotation",
+      "fieldname": "custom_actus_sim_id",
+      "label": "ACTUS Sim ID",
+      "fieldtype": "Data",
+      "insert_after": "custom_negotiation_id",
+      "description": "ACTUS PAM sim id behind the price. Source: treasury consult (P02, P05, P07, P08, P10)."
+    }
+  ]
+}

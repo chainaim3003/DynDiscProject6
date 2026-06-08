@@ -1,0 +1,69 @@
+{
+  "doctype": "Quotation Item",
+  "custom_perms": [],
+  "property_setters": [],
+  "sync_on_migrate": 1,
+  "custom_fields": [
+    {
+      "dt": "Quotation Item",
+      "fieldname": "custom_size",
+      "label": "Size",
+      "fieldtype": "Data",
+      "insert_after": "warehouse",
+      "description": "Size label (convenience copy). P01-P10."
+    },
+    {
+      "dt": "Quotation Item",
+      "fieldname": "custom_destination",
+      "label": "Destination (line)",
+      "fieldtype": "Data",
+      "insert_after": "custom_size",
+      "description": "Per-line destination (multi-destination basket). P04, P10."
+    },
+    {
+      "dt": "Quotation Item",
+      "fieldname": "custom_required_delivery_date",
+      "label": "Required Delivery Date (line)",
+      "fieldtype": "Date",
+      "insert_after": "custom_destination",
+      "description": "Per-line date (multi-date basket). P06."
+    },
+    {
+      "dt": "Quotation Item",
+      "fieldname": "custom_promised_ship_date",
+      "label": "Promised Ship Date",
+      "fieldtype": "Date",
+      "insert_after": "custom_required_delivery_date",
+      "description": "Seller's commit date for this line. P03, P06, P10."
+    },
+    {
+      "dt": "Quotation Item",
+      "fieldname": "custom_split_index",
+      "label": "Split Index",
+      "fieldtype": "Int",
+      "insert_after": "custom_promised_ship_date",
+      "default": "0",
+      "non_negative": 1,
+      "description": "1,2,... for split-shipment lines under one logical line. P06, P10."
+    },
+    {
+      "dt": "Quotation Item",
+      "fieldname": "custom_canFulfill",
+      "label": "Can Fulfill",
+      "fieldtype": "Check",
+      "insert_after": "custom_split_index",
+      "default": "0",
+      "description": "From Inventory consult. P03, P06, P10. NOTE: camelCase fieldname per DESIGN_6/03; verify it persists on this DB."
+    },
+    {
+      "dt": "Quotation Item",
+      "fieldname": "custom_lead_time_days",
+      "label": "Lead Time Days",
+      "fieldtype": "Int",
+      "insert_after": "custom_canFulfill",
+      "default": "0",
+      "non_negative": 1,
+      "description": "From Inventory consult. P03, P06, P10."
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "doctype": "Opportunity",
+  "custom_perms": [],
+  "property_setters": [],
+  "sync_on_migrate": 1,
+  "custom_fields": [
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_inquiry_id",
+      "label": "Inquiry ID (negotiationId)",
+      "fieldtype": "Data",
+      "insert_after": "expected_closing",
+      "in_standard_filter": 1,
+      "description": "Saga thread id; joins T2/T5 audit. Populated for all prompts."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_buyer_lei",
+      "label": "Buyer LEI",
+      "fieldtype": "Data",
+      "insert_after": "custom_inquiry_id",
+      "description": "GLEIF LEI of the buying entity. Populated for all prompts."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_buyer_agent",
+      "label": "Buyer Agent",
+      "fieldtype": "Data",
+      "insert_after": "custom_buyer_lei",
+      "description": "Buyer agent handle (e.g. tommyBuyerAgent). Populated for all prompts."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_buyer_oor",
+      "label": "Buyer OOR",
+      "fieldtype": "Data",
+      "insert_after": "custom_buyer_agent",
+      "description": "Buyer Official Org Role holder (e.g. Tommy_Chief_Procurement_Officer). P05, P08, P10."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_required_delivery_date",
+      "label": "Required Delivery Date",
+      "fieldtype": "Date",
+      "insert_after": "custom_buyer_oor",
+      "description": "Header-level required date (also mirrored to expected_closing). All prompts."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_delivery_destination",
+      "label": "Delivery Destination",
+      "fieldtype": "Data",
+      "insert_after": "custom_required_delivery_date",
+      "description": "Header-level destination distinct from billing address (e.g. Rotterdam, NL). All prompts."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_incoterm_requested",
+      "label": "Incoterm Requested",
+      "fieldtype": "Link",
+      "options": "Incoterm",
+      "insert_after": "custom_delivery_destination",
+      "description": "Requested Incoterm if specified by buyer."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_payment_term_requested",
+      "label": "Payment Term Requested",
+      "fieldtype": "Link",
+      "options": "Payment Term",
+      "insert_after": "custom_incoterm_requested",
+      "description": "Requested single payment term (Net-0 / Net-30 / Net-60). P01-P10."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_compare_terms_requested",
+      "label": "Compare Terms Requested (JSON)",
+      "fieldtype": "Long Text",
+      "insert_after": "custom_payment_term_requested",
+      "description": "JSON array for compare-mode, e.g. [\"Net-0\",\"Net-30\"]. P02."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_target_basket_json",
+      "label": "Target Basket (JSON)",
+      "fieldtype": "Long Text",
+      "insert_after": "custom_compare_terms_requested",
+      "description": "Per-style target rates JSON. P07, P08, P09, P10."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_max_negotiation_rounds",
+      "label": "Max Negotiation Rounds",
+      "fieldtype": "Int",
+      "insert_after": "custom_target_basket_json",
+      "default": "0",
+      "non_negative": 1,
+      "description": "0 (firm) / 1 / 2 / 3. P07(1), P08(3), P09(2), P10(3)."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_demand_aware",
+      "label": "Demand Aware",
+      "fieldtype": "Check",
+      "insert_after": "custom_max_negotiation_rounds",
+      "default": "0",
+      "description": "1 if buyer asked us to consider our order book. P09, P10."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_dd_required",
+      "label": "Due Diligence Required",
+      "fieldtype": "Check",
+      "insert_after": "custom_demand_aware",
+      "default": "0",
+      "description": "1 if buyer asked seller to run DD on itself. P05, P08, P10."
+    },
+    {
+      "dt": "Opportunity",
+      "fieldname": "custom_inquiry_dimensions_json",
+      "label": "Inquiry Dimensions (JSON snapshot)",
+      "fieldtype": "Long Text",
+      "insert_after": "custom_dd_required",
+      "description": "Verbatim parsed inquiry JSON snapshot (audit-safe). All prompts."
+    }
+  ]
+}
