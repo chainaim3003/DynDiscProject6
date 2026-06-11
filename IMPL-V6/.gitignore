@@ -15,6 +15,9 @@ data/
 .env.local
 .env.*.local
 
+# nested upstream repo — kept locally, never tracked here (was an accidental gitlink)
+/frappe_docker/
+
 # logs / os
 *.log
 .DS_Store
