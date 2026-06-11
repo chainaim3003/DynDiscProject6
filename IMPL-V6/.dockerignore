@@ -1,0 +1,20 @@
+# Build context excludes — keep the image small and the build reproducible.
+# (Lives at the build-context root; the Dockerfile is referenced from docker/.)
+node_modules
+dist
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.log
+data
+DEMO-DATA
+DESIGN
+docker
+scripts
+test
+*.md
+.vscode
+.idea
+npm-debug.log*

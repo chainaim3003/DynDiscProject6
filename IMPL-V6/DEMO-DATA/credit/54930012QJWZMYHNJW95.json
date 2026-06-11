@@ -1,0 +1,12 @@
+{
+  "_README": "PLACEHOLDER demo fixture. The CreditProvider REFUSES to serve any fixture with _placeholder:true unless explicitly constructed with allowPlaceholderFixtures:true. Replace the values below with REAL reference data (e.g. GLEIF registration status + EDGAR-derived pd1y/lgd + a real recommended term) and remove the _placeholder flag before any meaningful run. These numbers are NOT measured — do not treat them as a real credit assessment.",
+  "_placeholder": true,
+  "lei": "54930012QJWZMYHNJW95",
+  "legalEntityName": "Tommy Hilfiger Europe B.V.",
+  "gleifStatus": "ACTIVE", 
+  "financialHealthScore": 0,
+  "pd1y": 0,
+  "lgd": 0,
+  "recommendedTerms": "PRE_PAID",
+  "rationale": "PLACEHOLDER — replace with a real credit assessment rationale."
+}

@@ -1,0 +1,48 @@
+# ================= IMPL-V6 — HOST A (agent) compose =================
+# Brings up ONLY the agent (MCP-over-SSE) container. ERPNext is the external
+# system-of-record (its own frappe_docker deployment) and is reached over the
+# network via ERPNEXT_URL — it is NOT re-containerized here.
+#
+# Run from the project root:
+#   docker compose -f docker/docker-compose.yml up --build
+#
+# Env: values come from IMPL-V6/.env (env_file) and can be overridden by the
+# shell. ERPNEXT_URL defaults to host.docker.internal so the container can reach
+# an ERPNext running on the host machine (localhost:8080 from your POV).
+
+services:
+  agent:
+    build:
+      context: ..                      # IMPL-V6 project root
+      dockerfile: docker/Dockerfile
+    image: impl-v6-agent:latest
+    container_name: impl-v6-agent
+    env_file:
+      - ../.env                        # all non-secret + secret flags live here
+    environment:
+      # explicit overrides / container-correct defaults (win over .env)
+      PORT: "3000"
+      CREDENTIAL_MODE: "plain"         # no vLEI in this build
+      SIGNING_MODE: "plain"
+      # reach ERPNext on the host; override in .env for a remote/seeded instance
+      ERPNEXT_URL: "${ERPNEXT_URL:-http://host.docker.internal:8080}"
+    ports:
+      - "${PORT:-3000}:3000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"   # Linux: resolve the host for ERPNEXT_URL
+    volumes:
+      - agent-data:/app/data           # persist the SqliteSaver audit db (AUDIT_DB_PATH)
+    restart: on-failure
+    healthcheck:
+      test:
+        - "CMD"
+        - "node"
+        - "-e"
+        - "fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+volumes:
+  agent-data:
