@@ -12,7 +12,6 @@ data/
 
 # env / secrets
 .env
-.env.example
 .env.local
 .env.*.local
 
